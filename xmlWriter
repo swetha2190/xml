@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
+using System.Xml;
+
+namespace ReadWrite
+{
+class Employee
+{
+public int ID { get; set; }
+public string FirstName { get; set; }
+public string LastName { get; set; }
+public int Salary { get; set; }
+static void Main(string[] args)
+{
+Employee[] Emp = new Employee[]
+{
+new Employee() { ID=1,FirstName="Nick",LastName="Kamu",Salary=50000},
+new Employee() { ID=2,FirstName="Vick",LastName="Lad",Salary=10000},
+new Employee() { ID=3,FirstName="Sick",LastName="Singh",Salary=20000},
+new Employee() { ID=4,FirstName="Kick",LastName="Movie",Salary=30000}
+};
+using (XmlWriter writer = XmlWriter.Create("C:/Users/nikhil.kamu/Documents/Nick/Product.xml"))
+{
+writer.WriteStartDocument();
+writer.WriteStartElement("Employees");
+foreach(Employee e in Emp)
+{
+writer.WriteStartElement("Employee");
+writer.WriteElementString("ID", e.ID.ToString());
+writer.WriteElementString("FirstName", e.FirstName);
+writer.WriteElementString("LastName", e.LastName);
+writer.WriteElementString("Salary", e.Salary.ToString());
+writer.WriteEndElement();
+}
+writer.WriteEndElement();
+writer.WriteEndDocument();
+}
+Console.ReadLine();
+} 
+}
+}
